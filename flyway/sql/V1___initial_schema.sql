@@ -1,0 +1,14 @@
+CREATE TYPE SUBMISSION_STATUS AS ENUM ('pending', 'processed','failed');
+CREATE TYPE SUBMISSION_ENGINE AS ENUM ('CYCLES', 'BLENDER_EEVEE');
+
+CREATE TABLE blender_submission (
+  id SERIAL PRIMARY KEY,
+  user_uuid TEXT NOT NULL,
+  status SUBMISSION_STATUS NOT NULL DEFAULT 'pending',
+  input_file_name TEXT NOT NULL,
+  start_frame INTEGER NOT NULL,
+  end_frame INTEGER NOT NULL,
+  engine SUBMISSION_ENGINE NOT NULL DEFAULT 'CYCLES',
+  input_file BYTEA NOT NULL,
+  output_file BYTEA
+);
