@@ -8,12 +8,10 @@ const queueProcessor = createClient({
 await queueProcessor.connect();
 
 const processQueue = async() => {
-  //Pop a new item to be processed from queue
   const brPopPromise = await queueProcessor.brPop("rendering-queue",1);
   const item = await brPopPromise;
   if(item !== null){
     console.log("Processing render");
-    let submission = JSON.parse(item.element);
     submission =  await blenderSubmissionService.selectFromBlenderSubmissionsById(submission.id);
     console.log("render file fetched:", submission.input_file_name)
     try{
