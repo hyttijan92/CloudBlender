@@ -12,6 +12,7 @@ const processQueue = async() => {
   const item = await brPopPromise;
   if(item !== null){
     console.log("Processing render");
+    let submission = JSON.parse(item.element);
     submission =  await blenderSubmissionService.selectFromBlenderSubmissionsById(submission.id);
     console.log("render file fetched:", submission.input_file_name)
     try{
